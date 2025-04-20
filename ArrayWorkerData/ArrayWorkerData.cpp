@@ -17,8 +17,19 @@ struct worker{
 
     void input()
     {
-        printlabel("Input Worker Infomation");
         cout<<"Enter worker ID : "; cin>>id;
+        cout<<"Enter worker Name : ";
+        cin.ignore();
+        getline(cin, name);
+        cout<<"Enter worker Gender : "; cin>>gender;
+        cout<<"Enter worker Position : ";
+        cin.ignore();
+        getline(cin, position);
+        cout<<"Enter worker Wage : "; cin>>wage;
+        cout<<"Enter worker Hour : "; cin>>hour;
+    }
+
+    void update(){
         cout<<"Enter worker Name : ";
         cin.ignore();
         getline(cin, name);
@@ -155,7 +166,14 @@ int main(){
             case 2:
             {
                 system("cls");
-
+                if (counter == 0 ){
+                    cout<<"There is no data to edit!!"<<endl;
+                }
+                int foundIndex = searchWorkerbyID(workerArray, counter);
+                if (counter >=0)
+                    printlabel("Update Worker Info");
+                    workerArray[foundIndex].update();
+                    cout<<"Worker Info is update successfully!!!"<<endl;
                 pressenter();
             }
             break;
@@ -205,9 +223,10 @@ int main(){
                 }
 
                 int showOption;
-                showOption = printShowWorker();
                 do
                 {
+                    system("cls");
+                    showOption = printShowWorker();
                     switch(showOption){
                         case 1:{
                             system("cls");
@@ -215,27 +234,27 @@ int main(){
                             sort(workerArray, workerArray+counter, idComparator);
                             printWorker(workerArray, counter);
                             pressenter();
-                        }
-                        break;
+                        }break;
                         case 2:{
                             system("cls");
                             printlabel("Show Worker DES by Salary");
                             sort(workerArray, workerArray+counter, salaryComparator);
                             printWorker(workerArray, counter);
                             pressenter();
-                        }
-                        break;
+                        }break;
                         default:
-                            cout<<"Return To MainMenu!"<<endl;
-                            break;
+                            cout<<"\tReturn To MainMenu!"<<endl;
+                            pressenter();
+                        break;
                     }
-                }while (showOption != 3);
+                }while (showOption!=3);
+                break;
             }
             break;
-                pressenter();
             default:
-                cout<<"Exit From The Program!"<<endl;
-                break;
+                cout<<"\tExit From The Program!"<<endl;
+                pressenter();
+            break;
             }
     }while(option != 6);
 
