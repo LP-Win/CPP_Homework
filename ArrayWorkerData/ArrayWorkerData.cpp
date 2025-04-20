@@ -13,7 +13,7 @@ struct worker{
     string position;
     float wage = 0;
     float hour = 0;
-    float salary = wage * hour; 
+    float salary = 0; 
 
     void input()
     {
@@ -42,6 +42,7 @@ struct worker{
     }
 
     int workerSalary(){
+        float salary = wage * hour;
         if(gender == "Male" || gender == "male"){
             salary = (salary*70)/100; 
             cout<<"Worker Salary : "<<salary<<" $"<<endl;
@@ -49,7 +50,7 @@ struct worker{
             salary = (salary*75)/100; 
             cout<<"Worker Salary : "<<salary<<" $"<<endl;
         }else cout<<"Worker Salary is : "<<salary<<" $"<<endl;
-        
+        return salary;
     }
 };
 
@@ -149,10 +150,6 @@ int main(){
                 system("cls");
                 workerArray[counter++].input();
                 cout<<"====> Successfully Create Ner Worker!"<<endl;
-                printlabel("Show the input info");
-                system("cls");
-                printWorker(workerArray, counter);
-                pressenter();
             }
             break;
             case 2:
@@ -212,24 +209,25 @@ int main(){
                 do
                 {
                     switch(showOption){
-                        case 1:
+                        case 1:{
                             system("cls");
                             printlabel("Show Worker ASC by ID");
                             sort(workerArray, workerArray+counter, idComparator);
                             printWorker(workerArray, counter);
                             pressenter();
+                        }
                         break;
-                        case 2:
+                        case 2:{
                             system("cls");
                             printlabel("Show Worker DES by Salary");
                             sort(workerArray, workerArray+counter, salaryComparator);
                             printWorker(workerArray, counter);
                             pressenter();
+                        }
                         break;
-                        pressenter();
-                    default:
-                        cout<<"Return To MainMenu!"<<endl;
-                        break;
+                        default:
+                            cout<<"Return To MainMenu!"<<endl;
+                            break;
                     }
                 }while (showOption != 3);
             }
